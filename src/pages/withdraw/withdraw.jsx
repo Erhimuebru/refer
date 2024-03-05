@@ -75,7 +75,8 @@ const WithdrawFund = () => {
             Swal.fire({
                 icon: 'success',
                 title: 'Withdrawal Successful!',
-                text: 'Your withdrawal request has been processed.',
+                text:   'Your Bank Account Will Be Creadited In The Next 2Hours.',
+
                 confirmButtonText: 'OK',
             });
         } catch (error) {
