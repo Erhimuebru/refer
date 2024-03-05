@@ -111,7 +111,7 @@ const SignIn = () =>
         
         <div className="flex mt-16 mb-44 items-center justify-center">
         <div className="bg-gray-100 p-8 rounded-xl shadow-md w-80">
-          <h1 className="font-light whitespace-nowrap text-2xl  text-center mb-12 text-[#00ccbb] italic">Login To Naija-Update</h1>
+          <h1 className="font-light whitespace-nowrap  text-center mb-12 italic">Login To Naija-Update</h1>
           <form onSubmit={handleSubmit} className="login-form">
             {errorMessage && (
               <p className="text-red-500 text-center text-sm mb-4">{errorMessage}</p>

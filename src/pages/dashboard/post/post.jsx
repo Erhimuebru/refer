@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { apiGet } from "../../../utils/api";
 import PostDetailsCard from "./ProstDetailsCard";
 import './post.css'
+import Wallet from "../../../components/wallet/wallet";
 
 const Post = () => {
     const [postData, setPostData] = useState([]);
@@ -48,6 +49,7 @@ const Post = () => {
     
     return (
         <div className="items-center justify-center">
+          <Wallet/>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 ml-10 mt-8 justify-center">
                 {currentPosts.map((category, index) => (
                     <div    onClick={() => handleClick(category.id, category.imageUrl, category.headLine, category.details)}
