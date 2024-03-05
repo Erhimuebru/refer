@@ -55,13 +55,12 @@ const Wallet = () => {
         const { firstname, surname, email } = user; // Replace with your actual user properties
 
         // Redirect to Paystack payment page with user information
-        window.location.href = `https://paystack.com/pay/padi-sub?first_name=${firstname}&last_name=${surname}&email=${email}`;
+        window.location.href = `https://paystack.com/pay/2kmtd1loky?first_name=${firstname}&last_name=${surname}&email=${email}`;
       }
     } catch (error) {
       console.error('Error handling Paystack payment:', error);
     }
   };
-
   const handleLogoutClick = () => {
     handleLogout();
     localStorage.removeItem('token');
@@ -73,8 +72,8 @@ const Wallet = () => {
   const confirmDeposit = async (userId, reference) => {
     try {
       // Make an API request to your backend to confirm the deposit
-      // const response = await axios.post(`http://localhost:5000/wallet/${userId}/deposit`, {
-        const response = await axios.post(`https://foodpadi-backend.onrender.com/wallet/${userId}/deposit`, {
+      const response = await axios.post(`http://localhost:3002/wallet/${userId}/deposit`, {
+        // const response = await axios.post(`https://foodpadi-backend.onrender.com/wallet/${userId}/deposit`, {
      
         reference,
       });

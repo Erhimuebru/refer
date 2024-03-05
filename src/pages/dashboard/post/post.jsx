@@ -49,6 +49,20 @@ const Post = () => {
       });
     };
     
+
+    const handleFundWalletClick = () => {
+      try {
+        if (user) {
+          const { firstname, surname, email } = user; // Replace with your actual user properties
+  
+          // Redirect to Paystack payment page with user information
+          window.location.href = `https://paystack.com/pay/2kmtd1loky?first_name=${firstname}&last_name=${surname}&email=${email}`;
+        }
+      } catch (error) {
+        console.error('Error handling Paystack payment:', error);
+      }
+    };
+  
     return (
         <div className="items-center justify-center">
             <div>
