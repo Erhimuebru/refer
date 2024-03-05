@@ -1,70 +1,80 @@
 import React, { useState } from 'react';
-import { SocialIcon } from 'react-social-icons';
-import { PhoneIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaHome, FaPowerOff } from "react-icons/fa";
+import { BsPersonCircle } from "react-icons/bs";
+import { useUser } from '../../utils/useContext';
 
 const NavBar = () => {
-  const [showModal, setShowModal] = useState(false);
+  const { user, handleLogout } = useUser();
+  const userId = user ? user.id : localStorage.getItem('id');
 
-  const handleContactUsClick = () => {
-    setShowModal(true);
-  };
+  const handleLogoutClick = () => {
+    handleLogout();
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    Navigate('/');
+  }
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const [isNavBarVisible, setIsNavBarVisible] = useState(false);
+
+  const toggleNavBar = () => {
+    setIsNavBarVisible(prevState => !prevState);
   };
 
   return (
-    <div className="flex flex-1 justify-between items-center h-32 bg-[#00ccbb] pl-5 pr-10">
-      <div>
-        {/* <img
-          src="https://res.cloudinary.com/dmfb370xe/image/upload/v1686271612/EVENTS/foodpadi/Red_Black_Simple_F_Letter_Logo_Design_1_gqklpj.png"
-          className="w-10 m-1 h-10 p-1 bg-[#00ccbb] rounded-full"
-          alt=""
-        /> */}
-        <h1 className="text-2xl font-light italic p-4 text-white" >Naija Update</h1>
-      </div>
-      <div>
-        <p
-          className="p-1 bg-white rounded-lg text-[#00ccbb] font-bold cursor-pointer"
-          onClick={handleContactUsClick}
-        >
-          Contact us
-        </p>
+    <div>
+      <div className="pt-8 pb-10 h-56 bg-[#00ccbb]">
+        <div>
+          <h1 className="text-4xl font-extrabold text-center italic text-white" >Naija Update</h1>
+          <p className='text-sm font-bold text-center  text-white'>READ NEWS, GET UPDATED</p>
+          <p className='text-sm font-bold  text-white text-center'>AND</p>
+          <p className='text-sm font-bold  text-white text-center'>EARN MONEY FOR FREE UP 1,000,000</p>
+          <button onClick={toggleNavBar} className="bg-gray-800 ml-40 gap-2 mt-3 text-white flex items-center justify-center rounded-md p-4">
+            <GiHamburgerMenu/> <p>Menu</p>
+          </button>
+        </div>
       </div>
 
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-10 overflow-y-auto bg-gray-800 bg-opacity-50 flex justify-center items-center">
-          <div className="relative bg-white p-6 rounded-lg w-96">
-            <button
-              className="absolute top-3 font-extrabold right-3 text-gray-600 hover:text-gray-800"
-              onClick={handleCloseModal}
-            >
-              &#x2715;
-            </button>
-            <h1 className="text-lg font-bold mb-4 text-center">Contact Us</h1>
-            <div className='items-center justify-center'>
-
-              <h3 className="text-xl font-semibold ml-4 mb-4 mt-12 text-center">Social Media</h3>
-              <div className='flex gap-4 items-center justify-center'>
-                <SocialIcon url='https://wa.me/2349018471745'  fgColor='gray' bgColor='transparent'/>
-                <SocialIcon url='https://www.facebook.com/profile.php?id=100093726890134'  fgColor='gray' bgColor='transparent'/>
-                <SocialIcon url='https://twitter.com/FoodPadi'  fgColor='gray' bgColor='transparent'/>
-                
-                <SocialIcon url='https://www.instagram.com/food_padi'  fgColor='gray' bgColor='transparent'/>
-                <SocialIcon url='https://www.linkedin.com/in/erhimu-ebru-blessing-29aa4917b/' fgColor='gray' bgColor='transparent'/>    
-
-            </div>
-            </div>
-            <div className='items-center justify-center'>
-            <h3 className="text-xl font-semibold ml-4 mb-4 mt-12 text-center">Hot Line</h3>
-            <div className='flex gap-8 items-center justify-center'>
-            <p className='flex text-center'><PhoneIcon className='w-6 h-6 text-[gray] text-center'/>+123456789</p>
-            <p className='flex text-center'><PhoneIcon className='w-6 h-6 text-[gray] text-center'/>+123456789</p>
-
-            </div>
-            </div>
-          </div>
+      {isNavBarVisible && (
+        <div className="bg-[#00ccbb] p-4">
+          <ul className="flex flex-col gap-2">
+            {user ? ( // If user is logged in
+              <>
+                <Link to="/">
+                  <li className="flex items-center gap-1 p-2 hover:text-[#00ccbb] text-gray-800">
+                    <FaHome className="w-6 h-6" />
+                    Home
+                  </li>
+                </Link>
+                <Link to="/account">
+                  <li className="flex items-center gap-1 p-2 hover:text-[#00ccbb] text-gray-800">
+                    <BsPersonCircle className="w-6 h-6" />
+                    Account
+                  </li>
+                </Link>
+                <li onClick={handleLogoutClick} className="flex items-center gap-1 p-2 hover:text-[#00ccbb] text-gray-800 cursor-pointer">
+                  <FaPowerOff className="w-6 h-6" />
+                  Sign out
+                </li>
+              </>
+            ) : ( // If user is not logged in
+              <>
+                <Link to="/register">
+                  <li className="flex items-center gap-1 p-2 hover:text-[#00ccbb] text-gray-800">
+                    <BsPersonCircle className="w-6 h-6" />
+                    Register
+                  </li>
+                </Link>
+                <Link to="/">
+                  <li className="flex items-center gap-1 p-2 hover:text-[#00ccbb] text-gray-800">
+                    <FaPowerOff className="w-6 h-6" />
+                    Sign in
+                  </li>
+                </Link>
+              </>
+            )}
+          </ul>
         </div>
       )}
     </div>
@@ -72,7 +82,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-
-
-

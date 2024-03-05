@@ -9,7 +9,7 @@ const Post = () => {
     const [postData, setPostData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(0);
-    const [postsPerPage] = useState(20); // Change this according to your requirement
+    const [postsPerPage] = useState(20);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,15 +34,28 @@ const Post = () => {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = postData.slice(indexOfFirstPost, indexOfLastPost);
 
+
+    const handleClick = (id, imageUrl, headLine, details) => {
+      navigate(`/posts/${id}`, {
+        state: {
+          id,
+          imageUrl,
+          headLine,
+          details
+        }
+      });
+    };
+    
     return (
         <div className="items-center justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 ml-6 mt-8 justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 ml-10 mt-8 justify-center">
                 {currentPosts.map((category, index) => (
-                    <div className="overflow-hidden bg-gray-100 border border-gray-400 rounded-md shadow-md h-32 w-80 flex items-center justify-center sm:justify-start" key={index}>
+                    <div    onClick={() => handleClick(category.id, category.imageUrl, category.headLine, category.details)}
+                    className=" overflow-hidden bg-gray-100 border border-gray-400 rounded-md shadow-md h-32 w-80 flex items-center justify-center sm:justify-start" key={index}>
                         <div className="flex">
-                            <img className="w-24 h-24 object-cover" src={category.imageUrl} alt={category.headLine} />
+                            <img className="w-24 h- object-cover" src={category.imageUrl} alt={category.headLine} />
                             <div className="flex flex-col justify-center p-4">
-                                <h3 className="text-md font-semibold capitalize">{category.headLine}</h3>
+                                <h3 className="text-sm font-semibold capitalize">{category.headLine}</h3>
                             </div>
                         </div>
                     </div>
@@ -50,8 +63,8 @@ const Post = () => {
             </div>
             <ReactPaginate
     pageCount={Math.ceil(postData.length / postsPerPage)}
-    pageRangeDisplayed={3} // Change this according to your requirement
-    marginPagesDisplayed={1} // Change this according to your requirement
+    pageRangeDisplayed={2}
+    marginPagesDisplayed={1} 
     onPageChange={handlePageClick}
     previousLabel={"Prev"}
     nextLabel={"Next"}

@@ -329,9 +329,9 @@ const onNext = () => {
   
 
   return (
-    <div className="flex mt-16 items-center justify-center">
+    <div className="flex mt-16 mb-44 items-center justify-center">
       <div className="bg-gray-100 p-8 rounded-xl shadow-md w-80">
-        <h2 className="text-2xl  mt-5 mb-6 capitalize text-center">{formData.firstname || 'Sign Up'}</h2>
+        <h2 className=" mt-5 mb-6 capitalize text-center">{formData.firstname || 'Sign Up to Naija Update'}</h2>
         <ProgressBar step={step} />
         {errorMessage && (
               <p className="text-red-500 text-sm mb-4">{errorMessage}</p>

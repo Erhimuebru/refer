@@ -1,44 +1,83 @@
-import React from 'react'
-import { IoIosArrowForward } from "react-icons/io";
-import { FaStar } from "react-icons/fa";
-const PostDetailsCard = ({
-    id,
-    imageUrl,
-    dishName,
-    measurement,
-    price,
-    addItemToBasket 
-  }) => {
-   
-    return (  
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { apiGet } from "../../../utils/api";
+import { FaClock } from "react-icons/fa6";
+import { BsPersonCircle } from "react-icons/bs";
+const PostDetailsCard = () => {
+  const { id } = useParams();
+  const [restaurant, setRestaurant] = useState([]);
+  // const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const fetchRestaurantDetails = async () => {
+      try {
+        const { data } = await apiGet(`/posts/${id}`);
+        setRestaurant(data);
+        console.log(data)
+        // setLoading(false); 
+      } catch (error) {
+        // setLoading(false); 
+        // Handle error
+      }
+    };
+
+    fetchRestaurantDetails();
+  }, [id]);
+
+
+  return (
+    <div className="ml-6 bg-gray-100 mr-8">
+      <div className="">
+      <div className=' bg-gray-100 mt-8  w-full'>
+          <h1 className=' text-center font-extrabold  capitalize pt-4'>{restaurant.headLine}</h1>
+<div className='flex items-center justify-center gap-8'>
+<div className='flex items-center justify-center gap-2 mt-8 pb-2'>
+            <BsPersonCircle className='text-sm'/>
+          <p className='text-sm '>{restaurant.source}</p>
+          </div>
+
+          <div className='flex items-center justify-center gap-2 mt-8 pb-2'>
+            <FaClock className='text-sm'/>
+          <p className='text-sm '>{new Date(restaurant.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</p>
+          </div>
+</div>
         
-
-        <>
- 
- <div className='relative mt-40 ml-10'>
-                  
-
-                    <div className="bg-white absolute -top-24 -left-12 p-8 rounded-xl border border-gray-200 shadow-md w-52 h-40">
-                        <div className='flex items-center justify-between'>
-                        <img src={imageUrl} className=' absolute -top-12 left-4 w-20 h-20 rounded-full' alt="" />
-                        <p className=' absolute top-2 right-4 text-sm flex -ml-8 -mt84'> <FaStar className='w-4 h-4 text-[#2f80ed]' /> <span className='text-sm text-gray-400 font-light '>4.8(32)</span></p>
-                        </div>
-                    
-                        <div className='flex items-center justify-between'>
-                        <p className='text-sm mt-4 whitespace-nowrap capitalize'>{dishName}</p>
-                         
-                        </div>
-
-                        <div className='flex items-center mt-6 justify-between'>
-                            <button  onClick={addItemToBasket} className='text-sm p-2 bg-gray-100 rounded-xl cursor-pointer text-[#2f80ed]'>Add +</button>
-                            <p className='text-sm -mr-5 font-semibold'>₦{parseFloat(price).toLocaleString()} <br /> <span className='text-sm text-gray-400 font-normal ml-5'>/{measurement}</span></p>
-                        </div>
-                       
-                    </div>
+         
         </div>
-      </>  
-        
-    );
+        <div className='flex items-center w-full justify-between'>
+          <img src={restaurant.imageUrl} className='w-full mt-8' alt="" />
+        </div>
+
+
+        <div className='bg-gray-100 mt-10 w-ful'>
+          <p className='text-justify'>{restaurant.details}</p>
+          
+           
+        </div>
+
+
+        <div className='mt-8 mb-12'>
+        <button
+              type="submit"
+              className='bg-[#2f80ed] text-white text-bold w-full border p-2 rounded-2xl'
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <p className='gap-2 ml-48 flex items-center'>
+                    <CircleLoader color="#fff" size={20} />
+                    <span className="">Claiming...</span>
+                  </p>
+                </>
+              ) : (
+                'Claim Reward'
+              )}
+            </button>
+        </div>
+      
+      </div>
+    </div>
+  );
 }
  
 export default PostDetailsCard;
