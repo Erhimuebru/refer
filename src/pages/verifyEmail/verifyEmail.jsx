@@ -3,6 +3,7 @@ import { useParams, } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { apiGet } from '../../utils/api';
 
 const UserConfirmation = () => {
 //   const history = useHistory();
@@ -13,8 +14,7 @@ const UserConfirmation = () => {
 useEffect(() => {
   const confirmUser = async () => {
     try {
-      await axios.get(`http://localhost:3002/users/confirm/${userId}/${token}`);
-      // await axios.get(`https://foodpadi-backend.onrender.com/users/confirm/${userId}/${token}`);
+        await apiGet(`/users/confirm/${userId}/${token}`);
     
       Swal.fire({
         title: 'Account Confirmed!',

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+;
 import Swal from 'sweetalert2';
 import { CircleLoader } from 'react-spinners';
-
+import {   apiPost  } from "../../utils/api";
 import {ArrowLeftIcon,} from '@heroicons/react/24/solid';
 const NewPassword = () => {
     const { token } = useParams();
@@ -20,11 +20,9 @@ const NewPassword = () => {
     setLoading(true);
     try {
       // Make a POST request to your backend to reset the password
-      await axios.post(`http://localhost:7000/users/reset-password/${token}`, { password });
-          // await axios.post(` https://foodpadi-backend.onrender.com/users/reset-password/${token}`, { password });
+      await apiPost(`/users/reset-password/${token}`, { password });
+   
      
-
-
       // Show SweetAlert on success
       Swal.fire({
         title: 'Password Reset Successfully!',
@@ -69,16 +67,9 @@ const NewPassword = () => {
     //   <button onClick={handleResetPassword}>Reset Password</button>
     // </div>
     <>
-    
-    <div 
-              onClick={handleClick}
-         
-            className="absolute top-20 left-5 p-2 mb bg-gray-100 rounded-full"
-          >
-            <ArrowLeftIcon className="h-6 w-6 text-red-900" />
-          </div>
-    <div className="flex mt-40 items-center justify-center">
-    <div className="bg-white p-8 rounded-xl shadow-md w-80">
+ 
+          <div className="flex mt-20 mb-52 items-center justify-center">
+        <div className="bg-gray-100 p-8 rounded-xl shadow-md w-80">
         <div className="max-w-md mx-auto my-8">
             <h2 className="text-2xl font-bold mb-4 text-center">Enter A New Password</h2>
             <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-2">

@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { ChartBarIcon, WifiIcon, TvIcon, BoltIcon, WalletIcon, ArrowRightIcon, AcademicCapIcon, } from '@heroicons/react/24/solid';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useUser } from '../../utils/useContext';
-import axios from 'axios';
-import { apiGet } from "../../utils/api";
+import { apiGet, apiPost } from "../../utils/api";
 import { Link, useNavigate } from 'react-router-dom';
 import { CircleLoader } from 'react-spinners';
-
 
 const Wallet = () => {
   const Navigate = useNavigate();
@@ -71,9 +69,9 @@ const Wallet = () => {
 
   const confirmDeposit = async (userId, reference) => {
     try {
-      // Make an API request to your backend to confirm the deposit
-      const response = await axios.post(`http://localhost:3002/wallet/${userId}/deposit`, {
-        // const response = await axios.post(`https://foodpadi-backend.onrender.com/wallet/${userId}/deposit`, {
+
+        const response = await apiPost(`/wallet/${userId}/deposit`,{
+     
      
         reference,
       });
