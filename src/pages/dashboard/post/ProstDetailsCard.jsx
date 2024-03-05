@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { apiGet } from "../../../utils/api";
+import { apiGet, apiPost } from "../../../utils/api";
 import { FaClock } from "react-icons/fa6";
 import { BsPersonCircle } from "react-icons/bs";
+import { useUser } from '../../../utils/useContext'
+import Swal from 'sweetalert2';
 const PostDetailsCard = () => {
   const { id } = useParams();
+  const { user, handleLogout } = useUser();
+  const userId = user ? user.id : localStorage.getItem('id');
   const [restaurant, setRestaurant] = useState([]);
   // const [loading, setLoading] = useState(true); 
   const [loading, setLoading] = useState(false);
@@ -24,16 +28,54 @@ const PostDetailsCard = () => {
     fetchRestaurantDetails();
   }, [id]);
 
-
+ 
+  const handleSubmitOrder = async () => {
+    try {
+      const userId = localStorage.getItem('id');
+      const dishId = id;
+      const orderData = {
+        // Construct your order data object here
+        userId: userId,
+        dishId: dishId,
+      };
+  
+      await apiPost(`/wallet/${userId}/add-funds`, orderData);
+      console.log('Order placed:', orderData);
+  
+      // Show success message with SweetAlert
+      Swal.fire({
+        icon: 'success',
+        title: 'Reward claimed Successfully!',
+        confirmButtonText: 'OK',
+      });
+  
+    } catch (error) {
+      // Handle error
+      console.error('Error placing order:', error);
+  
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text:  error.response.data.message || 'Please check your internet connection and try again.',
+        confirmButtonText: 'OK',
+      });
+  
+    } finally {
+      // Any cleanup or additional actions can be placed here
+    }
+  };
+  
+  
   return (
     <div className="ml-6 bg-gray-100 mr-8">
+    
       <div className="">
       <div className=' bg-gray-100 mt-8  w-full'>
           <h1 className=' text-center font-extrabold  capitalize pt-4'>{restaurant.headLine}</h1>
 <div className='flex items-center justify-center gap-8'>
 <div className='flex items-center justify-center gap-2 mt-8 pb-2'>
             <BsPersonCircle className='text-sm'/>
-          <p className='text-sm '>{restaurant.source}</p>
+          <p className='text-sm uppercase '>{restaurant.source}</p>
           </div>
 
           <div className='flex items-center justify-center gap-2 mt-8 pb-2'>
@@ -61,6 +103,7 @@ const PostDetailsCard = () => {
               type="submit"
               className='bg-[#2f80ed] text-white text-bold w-full border p-2 rounded-2xl'
               disabled={loading}
+              onClick={handleSubmitOrder}
             >
               {loading ? (
                 <>

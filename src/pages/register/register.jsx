@@ -290,7 +290,7 @@ const onNext = () => {
       setLoading(true);
   
       try {
-        const postDataResult = await apiPost('/users/register', formData);
+        const postDataResult = await apiPost('/users/signup', formData);
         // await apiPost("/email/send", emailData);
   
         // Handle success response

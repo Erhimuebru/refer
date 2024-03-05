@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { apiGet } from "../../../utils/api";
-import PostDetailsCard from "./ProstDetailsCard";
+import { BsPersonCircle } from "react-icons/bs";
 import './post.css'
 import Wallet from "../../../components/wallet/wallet";
-
+import { useUser } from '../../../utils/useContext'
 const Post = () => {
+  const { user, handleLogout } = useUser();
+  const userId = user ? user.id : localStorage.getItem('id');
     const [postData, setPostData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(0);
@@ -49,7 +51,24 @@ const Post = () => {
     
     return (
         <div className="items-center justify-center">
+            <div>
+
+            <div className="flex gap-2 ml-10 mt-4 font-extrabold text-md text-gray-500 capitalize p-2 bg-white rounded-lg whitespace-nowrap">
+<BsPersonCircle className='text-md mt-1'/>
+      <p className="text-md">
+      Hi, {user.firstname}
+        </p>
+    </div>
+</div>
           <Wallet/>
+
+       
+          <div>
+          <Link to='/withdraw-funds'>
+            <p className=' mt-4 text-sm text-center text-blue-500 underline cursor-pointer'>Click here to withdraw funds</p>
+            </Link>
+          </div>
+        
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 ml-10 mt-8 justify-center">
                 {currentPosts.map((category, index) => (
                     <div    onClick={() => handleClick(category.id, category.imageUrl, category.headLine, category.details)}

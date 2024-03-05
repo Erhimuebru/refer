@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHome, FaPowerOff } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
 import { useUser } from '../../utils/useContext';
-
+import { Link, useNavigate } from 'react-router-dom';
 const NavBar = () => {
+  const Navigate = useNavigate();
   const { user, handleLogout } = useUser();
   const userId = user ? user.id : localStorage.getItem('id');
 
@@ -13,8 +13,9 @@ const NavBar = () => {
     handleLogout();
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+
     Navigate('/');
-  }
+  };
 
   const [isNavBarVisible, setIsNavBarVisible] = useState(false);
 
@@ -41,7 +42,7 @@ const NavBar = () => {
           <ul className="flex flex-col gap-2">
             {user ? ( // If user is logged in
               <>
-                <Link to="/">
+                <Link to="/dashboard">
                   <li className="flex items-center gap-1 p-2 hover:text-[#00ccbb] text-gray-800">
                     <FaHome className="w-6 h-6" />
                     Home
@@ -53,10 +54,12 @@ const NavBar = () => {
                     Account
                   </li>
                 </Link>
+
                 <li onClick={handleLogoutClick} className="flex items-center gap-1 p-2 hover:text-[#00ccbb] text-gray-800 cursor-pointer">
                   <FaPowerOff className="w-6 h-6" />
                   Sign out
                 </li>
+
               </>
             ) : ( // If user is not logged in
               <>
