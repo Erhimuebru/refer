@@ -26,6 +26,7 @@ export const apiUpdate = async (path, body) => {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("signature")}`,
     },
+    
   };
   return await axios.patch(`${baseUrl}${path}`, body, config);
 };
