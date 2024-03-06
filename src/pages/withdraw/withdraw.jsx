@@ -184,7 +184,6 @@ const WithdrawFund = () => {
                             required
                         />
                     </div>
-                    {/* <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">Withdraw</button> */}
                     <button
               type="submit"
               className="bg-[#00ccbb] text-white py-2 px-4 hover:cursor-pointer mt-3 w-64 rounded  relative"
