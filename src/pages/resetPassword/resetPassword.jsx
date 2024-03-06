@@ -15,7 +15,7 @@ const ResetPassword = () => {
     setLoading(true);
     try {
    
-        await apiPost(`/users/forgot-password`, {
+        await apiPost('/users/forgot-password', {
       
         resetToken,
         email,
