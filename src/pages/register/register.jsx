@@ -576,7 +576,7 @@ const onNext = () => {
 >
   {loading ? (
     <>
-      <p className='gap-2 ml-6 flex items-center'>
+      <p className='gap-2 ml-4 flex items-center'>
         <CircleLoader color="#fff" size={20} />
         <span className="">Submitting...</span>
       </p>
