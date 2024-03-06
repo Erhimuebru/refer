@@ -37,14 +37,13 @@ const SignIn = () =>
     };
     
     
+ 
     const handleSubmit = async (e) => {
       e.preventDefault();
     
       try {
         setLoading(true);
-    
         const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/users/login`, {
-         
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -53,28 +52,29 @@ const SignIn = () =>
         });
     
         const responseData = await response.json();
-
-        if (response.ok) {
-          const id = responseData.user.id;
-          localStorage.setItem('id', id);
-          const token = responseData.user.token
-          localStorage.setItem('token',token)
-          handleLogin(responseData.user);
-          console.log(responseData.user)
     
-         
+        if (response.ok) {
+          console.log(responseData);
+          const { _id: id, token, role } = responseData.user;
+          localStorage.setItem('_id', id);
+          localStorage.setItem('token', token);
+          handleLogin(responseData.user);
+          console.log(responseData.user);
+    
           Swal.fire({
             icon: 'success',
             title: 'Login Successful!',
             text: 'You have successfully logged in.',
             showConfirmButton: false,
-        
           });
     
-          // Navigate to the desired page after 2 seconds
           setTimeout(() => {
             Swal.close();
-            Navigate('/dashboard');
+            if (role === 'admin') {
+              Navigate('/admin-dashboard');
+            } else {
+              Navigate('/dashboard');
+            }
           }, 2000);
         } else {
           const errorData = responseData;
@@ -89,6 +89,7 @@ const SignIn = () =>
         }
       } catch (error) {
         console.error('Error during login:', error);
+        console.log(error);
     
         // Show SweetAlert error message for unexpected errors
         Swal.fire({

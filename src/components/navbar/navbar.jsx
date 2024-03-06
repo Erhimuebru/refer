@@ -30,7 +30,7 @@ const NavBar = () => {
           <h1 className="text-4xl font-extrabold text-center italic text-white" >Naija Update</h1>
           <p className='text-sm font-bold text-center  text-white'>READ NEWS, GET UPDATED</p>
           <p className='text-sm font-bold  text-white text-center'>AND</p>
-          <p className='text-sm font-bold  text-white text-center'>EARN MONEY FOR FREE UP 1,000,000</p>
+          <p className='text-sm font-bold  text-white text-center'>EARN MONEY FOR FREE UP ₦1,000,000</p>
           <button onClick={toggleNavBar} className="bg-gray-800 ml-40 gap-2 mt-3 text-white flex items-center justify-center rounded-md p-4">
             <GiHamburgerMenu/> <p>Menu</p>
           </button>
