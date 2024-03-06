@@ -43,7 +43,7 @@ const SignIn = () =>
     
       try {
         setLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/users/login`, {
+        const response = await fetch('https://referal-link.onrender.com/users/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
