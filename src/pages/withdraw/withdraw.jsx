@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import {  apiPost } from "../../utils/api";
 import { useUser } from '../../utils/useContext'
+import { CircleLoader } from 'react-spinners';
 const WithdrawFund = () => {
     const { user, handleLogout } = useUser();
     const userId = user ? user.id : localStorage.getItem('id');
     const [accountNumber, setAccountNumber] = useState('');
     const [accountName, setAccountName] = useState('');
+    const [loading, setLoading] = useState(false);
     const [selectedBank, setSelectedBank] = useState('');
     const [amount, setAmount] = useState('');
 
@@ -47,15 +49,37 @@ const WithdrawFund = () => {
         // Add logic to determine the bank based on the account number prefix
     };
 
+
+    const sendEmail = async (transactionData, email) => {
+        try {
+            
+            await apiPost('/trans-email/send', { transactionData, email });
+            console.log('Email sent successfully to', email);
+            return true; // Indicate successful email sending
+        } catch (error) {
+            console.error('Failed to send email:', error);
+            throw new Error('Failed to send email. Please try again later.');
+        }
+    };
+    
+    const getUserEmail = () => {
+        if (user && user.email) {
+            return user.email;
+        } else {
+            return localStorage.getItem('email');
+        }
+    };
+    
     const handleSubmitWithdrawal = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true);
             // Ensure that the accountName, accountNumber, selectedBank, and amount are properly set
             if (!accountName || !accountNumber || !selectedBank || !amount) {
                 throw new Error('Please fill in all account details and amount.');
             }
             const userId = localStorage.getItem('id');
-            const orderData = {
+            const transactionData = {
                 userId: userId,
                 accountName: accountName,
                 accountNumber: accountNumber,
@@ -63,7 +87,19 @@ const WithdrawFund = () => {
                 amount: amount,
             };
     
-            await apiPost(`/wallet/${userId}/withdraw`, orderData);
+            await apiPost(`/wallet/${userId}/withdraw`, transactionData);
+    
+            // Retrieve the user's email
+            const userEmail = await getUserEmail();
+            if (!userEmail) {
+                throw new Error('User email not found.');
+            }
+    
+            // Send email with transaction details
+            const emailSent = await sendEmail(transactionData, userEmail);
+            if (!emailSent) {
+                throw new Error('Failed to send email notification.');
+            }
     
             // Clear the input fields after successful withdrawal
             setAccountName('');
@@ -75,8 +111,7 @@ const WithdrawFund = () => {
             Swal.fire({
                 icon: 'success',
                 title: 'Withdrawal Successful!',
-                text:   'Your Bank Account Will Be Creadited In The Next 2Hours.',
-
+                text: 'Your Bank Account Will Be Credited In The Next 2 Hours.',
                 confirmButtonText: 'OK',
             });
         } catch (error) {
@@ -86,10 +121,13 @@ const WithdrawFund = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Withdrawal Failed',
-                text: error.response ? error.response.data.message || 'An error occurred during withdrawal.' : 'Please check your internet connection and try again.',
+                text: error.message || 'An error occurred during withdrawal.',
                 confirmButtonText: 'OK',
             });
-        }
+        }finally {
+            // Ensure that setLoading(false) is called even in case of errors
+            setLoading(false);
+          }
     };
     
 
@@ -146,7 +184,23 @@ const WithdrawFund = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">Withdraw</button>
+                    {/* <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">Withdraw</button> */}
+                    <button
+              type="submit"
+              className="bg-[#00ccbb] text-white py-2 px-4 hover:cursor-pointer mt-3 w-64 rounded  relative"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <p className='gap-2 ml-10 flex items-center'>
+                    <CircleLoader color="#fff" size={20} />
+                    <span className="">Submitting...</span>
+                  </p>
+                </>
+              ) : (
+                'Withdraw'
+              )}
+            </button>
                 </form>
             </div>
         </div>

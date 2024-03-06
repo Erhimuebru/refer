@@ -32,11 +32,11 @@ const PostDetailsCard = () => {
   const handleSubmitOrder = async () => {
     try {
       const userId = localStorage.getItem('id');
-      const dishId = id;
+      const token = id;
       const orderData = {
         // Construct your order data object here
         userId: userId,
-        dishId: dishId,
+        token: token,
       };
   
       await apiPost(`/wallet/${userId}/add-funds`, orderData);
