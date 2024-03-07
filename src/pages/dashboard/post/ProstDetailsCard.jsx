@@ -11,6 +11,7 @@ const PostDetailsCard = () => {
   const { user, handleLogout } = useUser();
   const userId = user ? user.id : localStorage.getItem('id');
   const [restaurant, setRestaurant] = useState([]);
+  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
@@ -18,6 +19,8 @@ const PostDetailsCard = () => {
         const { data } = await apiGet(`/posts/${id}`);
         setRestaurant(data);
         console.log(data)
+        const { token } = data;
+        setToken(token);
         // setLoading(false); 
       } catch (error) {
         // setLoading(false); 
@@ -33,14 +36,13 @@ const PostDetailsCard = () => {
     try {
       setLoading(true);
       const userId = localStorage.getItem('id');
-      const token = id;
       const orderData = {
         // Construct your order data object here
         userId: userId,
-        token: token,
+         token:token,
       };
   
-      await apiPost(`/wallet/${userId}/add-funds`, orderData);
+      await apiPost('/wallet/claim', orderData);
       console.log('Order placed:', orderData);
   
       // Show success message with SweetAlert
@@ -101,23 +103,7 @@ const PostDetailsCard = () => {
 
 
         <div className='mt-8 mb-12'>
-        {/* <button
-              type="submit"
-              className='bg-[#2f80ed] text-white text-bold w-full border p-2 rounded-2xl'
-              disabled={loading}
-              onClick={handleSubmitOrder}
-            >
-              {loading ? (
-                <>
-                  <p className='gap-2 ml-48 flex items-center'>
-                    <CircleLoader color="#fff" size={20} />
-                    <span className="">Claiming...</span>
-                  </p>
-                </>
-              ) : (
-                'Claim Reward'
-              )}
-            </button> */}
+      
 
 <button
               type="submit"
