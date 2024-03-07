@@ -121,7 +121,7 @@ const WithdrawFund = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Withdrawal Failed',
-                text: error.message || 'An error occurred during withdrawal.',
+                text: error.response.data.message || 'An error occurred during withdrawal.',
                 confirmButtonText: 'OK',
             });
         }finally {
