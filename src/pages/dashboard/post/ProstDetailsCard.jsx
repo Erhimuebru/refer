@@ -113,7 +113,7 @@ const PostDetailsCard = () => {
             >
               {loading ? (
                 <>
-                  <p className='gap-2 ml-10 flex items-center'>
+                  <p className='gap-2 ml-24 flex items-center'>
                     <CircleLoader color="#fff" size={20} />
                     <span className="">Submitting...</span>
                   </p>
