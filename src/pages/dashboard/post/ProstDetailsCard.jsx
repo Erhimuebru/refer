@@ -5,12 +5,12 @@ import { FaClock } from "react-icons/fa6";
 import { BsPersonCircle } from "react-icons/bs";
 import { useUser } from '../../../utils/useContext'
 import Swal from 'sweetalert2';
+import { CircleLoader } from 'react-spinners';
 const PostDetailsCard = () => {
   const { id } = useParams();
   const { user, handleLogout } = useUser();
   const userId = user ? user.id : localStorage.getItem('id');
   const [restaurant, setRestaurant] = useState([]);
-  // const [loading, setLoading] = useState(true); 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
@@ -29,8 +29,9 @@ const PostDetailsCard = () => {
   }, [id]);
 
  
-  const handleSubmitOrder = async () => {
+  const handleSubmit = async () => {
     try {
+      setLoading(true);
       const userId = localStorage.getItem('id');
       const token = id;
       const orderData = {
@@ -61,6 +62,7 @@ const PostDetailsCard = () => {
       });
   
     } finally {
+      setLoading(false);
       // Any cleanup or additional actions can be placed here
     }
   };
@@ -99,7 +101,7 @@ const PostDetailsCard = () => {
 
 
         <div className='mt-8 mb-12'>
-        <button
+        {/* <button
               type="submit"
               className='bg-[#2f80ed] text-white text-bold w-full border p-2 rounded-2xl'
               disabled={loading}
@@ -110,6 +112,24 @@ const PostDetailsCard = () => {
                   <p className='gap-2 ml-48 flex items-center'>
                     <CircleLoader color="#fff" size={20} />
                     <span className="">Claiming...</span>
+                  </p>
+                </>
+              ) : (
+                'Claim Reward'
+              )}
+            </button> */}
+
+<button
+              type="submit"
+              className="bg-[#00ccbb] text-white py-2 w-full px-4 hover:cursor-pointer mt-3 rounded  relative"
+              disabled={loading}
+              onClick={handleSubmit}
+            >
+              {loading ? (
+                <>
+                  <p className='gap-2 ml-10 flex items-center'>
+                    <CircleLoader color="#fff" size={20} />
+                    <span className="">Submitting...</span>
                   </p>
                 </>
               ) : (
