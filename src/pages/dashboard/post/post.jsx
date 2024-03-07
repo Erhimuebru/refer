@@ -50,18 +50,7 @@ const Post = () => {
     };
     
 
-    const handleFundWalletClick = () => {
-      try {
-        if (user) {
-          const { firstname, surname, email } = user; // Replace with your actual user properties
-  
-          // Redirect to Paystack payment page with user information
-          window.location.href = `https://paystack.com/pay/2kmtd1loky?first_name=${firstname}&last_name=${surname}&email=${email}`;
-        }
-      } catch (error) {
-        console.error('Error handling Paystack payment:', error);
-      }
-    };
+
   
     return (
         <div className="items-center justify-center">
@@ -83,7 +72,7 @@ const Post = () => {
             </Link>
           </div>
         
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 ml-10 mt-8 justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 ml-6 mt-8 justify-center">
                 {currentPosts.map((category, index) => (
                     <div    onClick={() => handleClick(category.id, category.imageUrl, category.headLine, category.details)}
                     className=" overflow-hidden bg-gray-100 border border-gray-400 rounded-md shadow-md h-32 w-80 flex items-center justify-center sm:justify-start" key={index}>

@@ -77,12 +77,12 @@ const PostDetailsCard = () => {
       <div className=' bg-gray-100 mt-8  w-full'>
           <h1 className=' text-center font-extrabold  capitalize pt-4'>{restaurant.headLine}</h1>
 <div className='flex items-center justify-center gap-8'>
-<div className='flex items-center justify-center gap-2 mt-8 pb-2'>
+<div className='flex items-center justify-center gap-1 mt-8 pb-2 text-gray-500'>
             <BsPersonCircle className='text-sm'/>
           <p className='text-sm uppercase '>{restaurant.source}</p>
           </div>
 
-          <div className='flex items-center justify-center gap-2 mt-8 pb-2'>
+          <div className='flex items-center text-gray-500 justify-center gap-1 mt-8 pb-2'>
             <FaClock className='text-sm'/>
           <p className='text-sm '>{new Date(restaurant.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</p>
           </div>
