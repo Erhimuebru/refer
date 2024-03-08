@@ -56,7 +56,7 @@ const Post = () => {
         <div className="items-center justify-center">
             <div>
 
-            <div className="flex gap-2 ml-10 mt-4 font-extrabold text-md text-gray-500 capitalize p-2 bg-white rounded-lg whitespace-nowrap">
+            <div className="flex gap-2 ml-6 mt-4 font-extrabold text-md text-gray-500 capitalize p-2 bg-white rounded-lg whitespace-nowrap">
 <BsPersonCircle className='text-md mt-1'/>
       <p className="text-md">
       Hi, {user.firstname}
