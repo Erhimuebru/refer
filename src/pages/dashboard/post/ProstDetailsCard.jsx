@@ -6,6 +6,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { useUser } from '../../../utils/useContext'
 import Swal from 'sweetalert2';
 import { CircleLoader } from 'react-spinners';
+import Loading from '../../../components/loading/loading';
 const PostDetailsCard = () => {
   const { id } = useParams();
   const { user, handleLogout } = useUser();
@@ -13,25 +14,28 @@ const PostDetailsCard = () => {
   const [restaurant, setRestaurant] = useState([]);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingTwo, setLoadingTwo] = useState(true);
+
+
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
       try {
         const { data } = await apiGet(`/posts/${id}`);
         setRestaurant(data);
-        console.log(data)
         const { token } = data;
         setToken(token);
-        // setLoading(false); 
       } catch (error) {
-        // setLoading(false); 
         // Handle error
+        console.error('Error fetching restaurant details:', error);
+      } finally {
+        // Set loading to false after fetching data (whether success or error)
+        setLoadingTwo(false);
       }
     };
 
     fetchRestaurantDetails();
   }, [id]);
 
- 
   const handleSubmit = async () => {
     try {
       setLoading(true);
@@ -68,8 +72,12 @@ const PostDetailsCard = () => {
       // Any cleanup or additional actions can be placed here
     }
   };
+
   
-  
+if (loadingTwo || !restaurant) {
+  // Render loading spinner if data is still loading or restaurant data is not available yet
+  return <Loading />;
+}
   return (
     <div className="ml-8 bg-gray-100 mr-8">
     
@@ -119,7 +127,7 @@ const PostDetailsCard = () => {
                   </p>
                 </>
               ) : (
-                'Claim Reward'
+                'Claim Reward ₦50'
               )}
             </button>
         </div>

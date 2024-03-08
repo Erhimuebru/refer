@@ -108,10 +108,15 @@ const SignIn = () =>
 
     return (
         <>
-        
-        <div className="flex mt-16 mb-44 items-center justify-center">
+     <div className="flex mt-16 mb-8 items-center justify-center">
         <div className="bg-gray-100 p-8 rounded-xl shadow-md w-80">
-          <h1 className="font-light whitespace-nowrap  text-center mb-12 italic">Login To Naija-Update</h1>
+          <p className='text-gray-500'>"Welcome to 9ja-Update..! <br /> Dive into the latest news with us and earn rewards as you stay informed. Enjoy ₦50 for every news piece you explore. Happy reading, happy earning!"</p>
+        </div>
+        </div>
+      
+        <div className="flex mb-14 items-center justify-center">
+        <div className="bg-gray-100 p-8 rounded-xl shadow-md w-80">
+          <p className="font-light whitespace-nowrap text-center mb-12 text-gray-500 italic">Login to 9ja-Update <br />and <br />start earning!</p>
           <form onSubmit={handleSubmit} className="login-form">
             {errorMessage && (
               <p className="text-red-500 text-center text-sm mb-4">{errorMessage}</p>
@@ -148,13 +153,13 @@ const SignIn = () =>
             </div>
             <button
               type="submit"
-              className="bg-[#00ccbb] text-white py-2 px-4 hover:cursor-pointer mt-3 w-64 rounded  relative"
+              className="bg-yellow-500 text-white py-2 px-4 hover:cursor-pointer mt-3 w-64 rounded  relative"
               disabled={loading}
             >
               {loading ? (
                 <>
-                  <p className='gap-2 ml-10 flex items-center'>
-                    <CircleLoader color="#fff" size={20} />
+                  <p className='gap-2 ml-8 flex items-center'>
+                    <CircleLoader color="#fff" size={18} />
                     <span className="">Submitting...</span>
                   </p>
                 </>

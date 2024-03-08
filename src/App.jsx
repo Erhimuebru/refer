@@ -13,6 +13,7 @@ import ResetPassword from './pages/resetPassword/resetPassword';
 import NewPassword from './pages/resetPassword/newPassword';
 import Profile from './pages/profile/profile';
 import WithdrawFund from './pages/withdraw/withdraw';
+import Header from './components/hero/hero';
 
 function App() {
 

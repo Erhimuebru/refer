@@ -570,7 +570,7 @@ const onNext = () => {
 
 <button
   type="submit"
-  className="bg-[#00ccbb] text-white p-1 rounded-md font-semibold relative"
+  className="bg-yellow-500 text-white p-1 rounded-md font-semibold relative"
   disabled={loading}
   onClick={() => onSaleCreate()}
 >

@@ -6,6 +6,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import './post.css'
 import Wallet from "../../../components/wallet/wallet";
 import { useUser } from '../../../utils/useContext'
+import Loading from "../../../components/loading/loading";
 const Post = () => {
   const { user, handleLogout } = useUser();
   const userId = user ? user.id : localStorage.getItem('id');
@@ -49,7 +50,9 @@ const Post = () => {
       });
     };
     
-
+    if (loading) {
+      return <Loading />;
+    }
 
   
     return (
@@ -80,6 +83,7 @@ const Post = () => {
                             <img className="w-24 h- object-cover" src={category.imageUrl} alt={category.headLine} />
                             <div className="flex flex-col justify-center p-4">
                                 <h3 className="text-sm font-semibold capitalize">{category.headLine}</h3>
+                                <p className='text-sm text-gray-500 mt-3 '>{new Date(category.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</p>
                             </div>
                         </div>
                     </div>

@@ -136,7 +136,7 @@ const Wallet = () => {
               Transactions <ArrowRightIcon className="w-3 h-3 mt-1" />
             </p> */}
             <button
-              className="text-white text-sm font-bold bg-[#00bbcc] mt-4 mr-4 rounded-2xl p-2"
+              className="text-white text-sm font-bold bg-yellow-500 mt-4 mr-4 rounded-2xl p-2"
               onClick={handleFundWalletClick}
             >
               + Fund Wallet

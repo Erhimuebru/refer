@@ -68,7 +68,7 @@ const ResetPassword = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" />
                   <button
-                    className={`bg-[#00ccbb] text-white py-2 px-4 mt-3 w-64 rounded relative ${!email && 'opacity-50 cursor-not-allowed'}`}
+                    className={`bg-yellow-500 text-white py-2 px-4 mt-3 w-64 rounded relative ${!email && 'opacity-50 cursor-not-allowed'}`}
                       onClick={handleResetPassword}
                       type="submit"
                     

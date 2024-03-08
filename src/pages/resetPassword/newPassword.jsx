@@ -86,7 +86,7 @@ const NewPassword = () => {
             <button
                 onClick={handleResetPassword}
                 type="submit"
-                className={`bg-[#00ccbb] text-white py-2 px-4 mt-3 w-64 rounded relative ${!password && 'opacity-50 cursor-not-allowed'}`}
+                className={`bg-yellow-500 text-white py-2 px-4 mt-3 w-64 rounded relative ${!password && 'opacity-50 cursor-not-allowed'}`}
                 disabled={loading || !password}
             >
                 {loading ? (
