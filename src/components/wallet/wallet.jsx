@@ -104,7 +104,7 @@ const Wallet = () => {
     
       <div className="overflow-hidden">
      
-        <div className="flex flex-row justify-between gap-10 bg-gray-100 h-28 mb-4 mt-4 rounded-lg w-80 ml-10">
+        <div className="flex flex-row justify-between gap-10 bg-gray-100 h-28 mb-4 mt-4 rounded-lg w-80 ml-6">
           <div className='ml-2 mt-4'>
             <p className="text-gray-300 gap-2 whitespace-nowrap mb-8 text-sm flex">
               Available Balance{" "}

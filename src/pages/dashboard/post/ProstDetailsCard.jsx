@@ -71,7 +71,7 @@ const PostDetailsCard = () => {
   
   
   return (
-    <div className="ml-6 bg-gray-100 mr-8">
+    <div className="ml-8 bg-gray-100 mr-8">
     
       <div className="">
       <div className=' bg-gray-100 mt-8  w-full'>
