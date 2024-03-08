@@ -176,7 +176,7 @@ const SignIn = () =>
           <Link to="/register">
             <button
               type="submit"
-              className='bg-green-400 text-white font-semibold py-2 px-4 w-64 rounded hover:cursor-pointer hover:bg-blue-600'
+              className='bg-[#00ccbb] text-white font-semibold py-2 px-4 w-64 rounded hover:cursor-pointer hover:bg-blue-600'
             >
               Create new account
             </button>

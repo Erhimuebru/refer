@@ -115,7 +115,7 @@ if (loadingTwo || !restaurant) {
 
 <button
               type="submit"
-              className="bg-[#00ccbb] text-white py-2 w-full px-4 hover:cursor-pointer mt-3 rounded  relative"
+              className="bg-yellow-500 text-white py-2 w-full px-4 hover:cursor-pointer mt-3 rounded  relative"
               disabled={loading}
               onClick={handleSubmit}
             >
