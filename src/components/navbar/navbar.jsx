@@ -135,7 +135,7 @@ const NavBar = () => {
 
       {isNavBarVisible && (
         <div className=" p-4">
-          <ul className="flex flex-col gap-2 -mt-14">
+          <ul className="flex flex-col gap-2 -mt-16">
             {user ? ( // If user is logged in
               <>
                 <Link to="/dashboard">
