@@ -63,8 +63,16 @@ const PostDetailsCard = () => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text:  error.response.data.message || 'Please check your internet connection and try again.',
+        text: error.response.data.message || 'Please check your internet connection and try again.',
         confirmButtonText: 'OK',
+        showCancelButton: true,
+        cancelButtonText: 'Fund Wallet',
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.cancel) {
+          // Redirect to payment page with user data
+          const { firstName, surname, email } = user || {}; // Destructure user object again
+          window.location.href = `https://paystack.com/pay/2kmtd1loky?first_name=${firstName}&last_name=${surname}&email=${email}`;
+        }
       });
   
     } finally {
@@ -87,12 +95,12 @@ if (loadingTwo || !restaurant) {
 <div className='flex items-center justify-center gap-8'>
 <div className='flex items-center justify-center gap-1 mt-8 pb-2 text-gray-500'>
             <BsPersonCircle className='text-sm'/>
-          <p className='text-sm uppercase '>{restaurant.source}</p>
+          <p className='text-xs whitespace-nowrap uppercase '>{restaurant.source}</p>
           </div>
 
           <div className='flex items-center text-gray-500 justify-center gap-1 mt-8 pb-2'>
             <FaClock className='text-sm'/>
-          <p className='text-sm '>{new Date(restaurant.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</p>
+          <p className='text-xs whitespace-nowrap '>{new Date(restaurant.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</p>
           </div>
 </div>
         
