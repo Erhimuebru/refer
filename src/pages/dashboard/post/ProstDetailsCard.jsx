@@ -70,14 +70,14 @@ const PostDetailsCard = () => {
       }).then((result) => {
         if (result.dismiss === Swal.DismissReason.cancel) {
           // Redirect to payment page with user data
-          const { firstName, surname, email } = user || {}; // Destructure user object again
-          window.location.href = `https://paystack.com/pay/2kmtd1loky?first_name=${firstName}&last_name=${surname}&email=${email}`;
+          const {firstname, surname, email } = user || {}; // Destructure user object again
+          window.location.href = `https://paystack.com/pay/o5be1mgez-?first_name=${firstname}&last_name=${surname}&email=${email}`;
         }
       });
   
     } finally {
       setLoading(false);
-      // Any cleanup or additional actions can be placed here
+     
     }
   };
 
