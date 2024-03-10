@@ -45,7 +45,6 @@ const Wallet = () => {
     setIsBalanceVisible(!isBalanceVisible);
   };
 
- 
 
   const handleFundWalletClick = () => {
     try {

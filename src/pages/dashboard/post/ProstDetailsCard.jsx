@@ -74,7 +74,6 @@ const PostDetailsCard = () => {
           window.location.href = `https://paystack.com/pay/o5be1mgez-?first_name=${firstname}&last_name=${surname}&email=${email}`;
         }
       });
-  
     } finally {
       setLoading(false);
      
