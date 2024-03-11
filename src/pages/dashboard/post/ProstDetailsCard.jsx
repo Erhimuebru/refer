@@ -65,15 +65,8 @@ const PostDetailsCard = () => {
         title: 'Oops...',
         text: error.response.data.message || 'Please check your internet connection and try again.',
         confirmButtonText: 'OK',
-        showCancelButton: true,
-        cancelButtonText: 'Fund Wallet',
-      }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.cancel) {
-          // Redirect to payment page with user data
-          const {firstname, surname, email } = user || {}; // Destructure user object again
-          window.location.href = `https://paystack.com/pay/o5be1mgez-?first_name=${firstname}&last_name=${surname}&email=${email}`;
-        }
-      });
+     
+      })
     } finally {
       setLoading(false);
      
