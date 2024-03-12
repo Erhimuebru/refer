@@ -75,7 +75,6 @@ const PostDetailsCard = () => {
 
   
 if (loadingTwo || !restaurant) {
-  // Render loading spinner if data is still loading or restaurant data is not available yet
   return <Loading />;
 }
   return (
