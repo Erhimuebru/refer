@@ -84,8 +84,8 @@ if (loadingTwo || !restaurant) {
       <div className="">
       <div className=' bg-gray-100 mt-8  w-full'>
           <h1 className=' text-center font-extrabold  capitalize pt-4'>{restaurant.headLine}</h1>
-<div className='flex items-center justify-center gap-8'>
-<div className='flex items-center justify-center gap-1 mt-8 pb-2 text-gray-500'>
+        <div className='flex items-center justify-center gap-8'>
+        <div className='flex items-center justify-center gap-1 mt-8 pb-2 text-gray-500'>
             <BsPersonCircle className='text-sm'/>
           <p className='text-xs whitespace-nowrap uppercase '>{restaurant.source}</p>
           </div>
