@@ -202,10 +202,8 @@ const WithdrawFund = () => {
             </button>
                 </form>
             </div>
-        </div>
-       
-       
-       
+        </div>     
+
     );
 };
 
